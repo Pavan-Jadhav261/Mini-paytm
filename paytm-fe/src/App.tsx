@@ -1,12 +1,15 @@
 import React from 'react'
+import Navbar from './components/Navbar'
+import Transiction from './components/main/Transiction'
+import Signin from './pages/Signup'
 
 const App = () => {
   return (
-    <div className='bg-black h-screen w-full text-white flex justify-center items-center'>
+  <>
+  
+<Signin/>
 
-      <button className='bg-white rounded-sm text-black p-2 hover:p-2.5 transition-all duration-200'>Click me</button>
-    </div>
-
+  </>
   )
 }
 

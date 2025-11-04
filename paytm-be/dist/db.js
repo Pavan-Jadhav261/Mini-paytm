@@ -33,9 +33,9 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userModel = void 0;
+exports.accountModel = exports.userModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-const connect = mongoose_1.default.connect("mongodb://localhost:27017/paytm");
+const connect = mongoose_1.default.connect("mongodb+srv://pavanjadhav9331_db_user:Qpgk1mI0qhXltKYD@cluster0.ogqkni1.mongodb.net/");
 const userSchema = new mongoose_1.Schema({
     username: { type: String, unique: true, required: true, trim: true, lowercase: true },
     password: String,
@@ -43,4 +43,9 @@ const userSchema = new mongoose_1.Schema({
     lastName: String
 });
 exports.userModel = (0, mongoose_1.model)("users", userSchema);
+const AccountSchema = new mongoose_1.Schema({
+    userId: mongoose_1.default.Types.ObjectId,
+    balance: Number
+});
+exports.accountModel = (0, mongoose_1.model)("balance", AccountSchema);
 //# sourceMappingURL=db.js.map

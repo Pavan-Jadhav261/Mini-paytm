@@ -1,7 +1,7 @@
 import mongoose, { model, Schema } from "mongoose"
 
 
-const connect  = mongoose.connect("mongodb://localhost:27017/paytm")
+const connect  = mongoose.connect("mongodb+srv://pavanjadhav9331_db_user:Qpgk1mI0qhXltKYD@cluster0.ogqkni1.mongodb.net/")
 const userSchema  = new Schema({
     username : {type:String,unique:true,required : true ,trim:true,lowercase : true},
     password: String,
@@ -11,3 +11,9 @@ const userSchema  = new Schema({
 
 export const userModel = model("users",userSchema)
 
+const AccountSchema = new Schema({
+    userId : mongoose.Types.ObjectId,
+    balance : Number 
+})
+
+export const accountModel = model("balance" , AccountSchema)

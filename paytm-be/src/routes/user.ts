@@ -1,5 +1,5 @@
 import express from "express"
-import { userModel } from "../db"
+import { accountModel, userModel } from "../db"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
@@ -27,6 +27,11 @@ userRouter.post("/signup",async(req,res)=>{
                 password:hashPassword,
                 firstName:firstName,
                 lastName:lastName
+            })
+
+            await accountModel.create({
+                userId : response._id,
+                balance : 1 + Math.random() * 10000
             })
         }catch(e){
             res.json({
