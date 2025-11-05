@@ -1,7 +1,9 @@
 import mongoose, { model, Schema } from "mongoose"
+import dotenv from "dotenv"
+dotenv.config()
 
 
-const connect  = mongoose.connect("mongodb+srv://pavanjadhav9331_db_user:Qpgk1mI0qhXltKYD@cluster0.ogqkni1.mongodb.net/")
+const connect  = mongoose.connect(`mongodb+srv://pavanjadhav9331_db_user:${process.env.MONGO_PWD}@cluster0.ogqkni1.mongodb.net/`)
 const userSchema  = new Schema({
     username : {type:String,unique:true,required : true ,trim:true,lowercase : true},
     password: String,

@@ -5,12 +5,14 @@ import mongoose from "mongoose";
 
 const account = express();
 
-account.get("/balance",AuthMiddleware,async(req : AuthRequest,res : Response)=>{
+account.get("/balance",AuthMiddleware,async(req : AuthRequest,res )=>{
     const userId = req.userId
     try{
         const response = await accountModel.findOne({
             userId : userId
         })
+        console.log(response);
+        
         res.json({
             msg : response?.balance
         })
@@ -33,12 +35,12 @@ account.post("/transaction",AuthMiddleware , async(req:AuthRequest , res:Respons
 
     if(!response?.balance || response?.balance < amount){
         await session.abortTransaction()
-        return  res.json({
+       
+        return  res.status(400).json({
             msg : "insufficient balance"
         })
     }   try{
 
-    
         await accountModel.findOneAndUpdate({userId : from}, {
             $inc:{
                 balance :  -amount
@@ -48,7 +50,7 @@ account.post("/transaction",AuthMiddleware , async(req:AuthRequest , res:Respons
             userId : to
         },{
             $inc : {
-                balance : amount
+                balance : +amount
             }
         }).session(session)
 
@@ -67,5 +69,7 @@ account.post("/transaction",AuthMiddleware , async(req:AuthRequest , res:Respons
         session.endSession()
     }
 })
+
+
 
 export default account
